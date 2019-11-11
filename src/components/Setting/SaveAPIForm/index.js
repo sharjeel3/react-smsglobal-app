@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 export const SaveAPIForm = props => {
   const { onSaveClick } = props;
 
-  const { handleChange: reduxChangeHandler } = useSaveAPIFormHook();
+  const { handleChange: reduxChangeHandler, resetForm } = useSaveAPIFormHook();
 
   const handleValueChange = field => value => {
     reduxChangeHandler(field, value);
@@ -23,7 +23,12 @@ export const SaveAPIForm = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    onSaveClick();
+    const saveStatus = onSaveClick();
+    if (saveStatus === true) {
+      resetForm([API_KEY_FIELD, API_SECRET_FIELD, API_DISPLAY_NAME_FIELD]);
+    } else {
+      // TODO: raise error
+    }
   };
 
   const apiKeyState = useSelector(getFieldState(API_KEY_FIELD));

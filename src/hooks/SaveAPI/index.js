@@ -17,5 +17,20 @@ export const useSaveAPIFormHook = () => {
     );
   };
 
-  return { handleChange };
+  const resetForm = fields => {
+    const payload = Object.assign(
+      {},
+      ...fields.map(field => ({
+        [field]: {
+          field,
+          value: '',
+          touch: false,
+          message: ''
+        }
+      }))
+    );
+    dispatch(updateFormField(payload));
+  };
+
+  return { handleChange, resetForm };
 };

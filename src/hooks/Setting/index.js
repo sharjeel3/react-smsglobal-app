@@ -13,9 +13,11 @@ export const useSettingHook = () => {
   const apiDisplayNameValue = useSelector(getFieldValue(API_DISPLAY_NAME_FIELD));
 
   const handleSaveClick = () => {
-    LocalStorage.save(API_KEY_FIELD, apiKeyValue);
-    LocalStorage.save(API_SECRET_FIELD, apiSecretValue);
-    LocalStorage.save(API_DISPLAY_NAME_FIELD, apiDisplayNameValue);
+    return (
+      LocalStorage.save(API_KEY_FIELD, apiKeyValue) &&
+      LocalStorage.save(API_SECRET_FIELD, apiSecretValue) &&
+      LocalStorage.save(API_DISPLAY_NAME_FIELD, apiDisplayNameValue)
+    );
   };
 
   return { handleSaveClick };
