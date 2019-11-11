@@ -1,5 +1,8 @@
+import React from 'react';
+import { Setting } from '../../components/Setting';
+
 const SettingView = () => {
-  return 'setting';
+  return <Setting />;
 };
 
 // React lazy requires default export

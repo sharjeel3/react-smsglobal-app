@@ -1,5 +1,5 @@
 const HomeView = () => {
-  return 'home';
+  return 'Select a page first';
 };
 
 // React lazy requires default export
