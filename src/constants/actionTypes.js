@@ -1,1 +1,2 @@
 export const UPDATE_FORM_FIELD = 'UPDATE_FORM_FIELD';
+export const LOAD_API_CONFIG = 'LOAD_API_CONFIG';
