@@ -2,12 +2,18 @@ import React from 'react';
 import { Header } from '../../ui-library/Header';
 import PropTypes from 'prop-types';
 import { Wrapper } from './styles';
+import { Navigation } from '../../components/Navigation';
 
 export const Layout = ({ children }) => {
   return (
     <>
       <Header />
-      <Wrapper>{children}</Wrapper>
+      <Wrapper>
+        <div className="aside">
+          <Navigation />
+        </div>
+        <div className="content">{children}</div>
+      </Wrapper>
     </>
   );
 };
