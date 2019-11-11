@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TEXT AREA FIELD - UI Library renders correctly 1`] = `
+.c1 {
+  font-weight: 600;
+  font-size: 1em;
+  line-height: 2;
+  color: #1C1C1C;
+  display: block;
+}
+
+.c3 {
+  font-size: 1em;
+  line-height: 2em;
+  color: #EB5757;
+  min-height: 2em;
+}
+
+.c0 {
+  margin-bottom: 0.5em;
+}
+
+.c2 {
+  font-size: 1em;
+  padding: 1em;
+  background-color: #eeeeee;
+  border: 0.1em solid transparent;
+  border-radius: 0.25em;
+  color: #1C1C1C;
+  height: 8em;
+  line-height: 1.5em;
+  width: 100%;
+  max-width: 100%;
+}
+
+<div
+  className="c0"
+>
+  <label
+    className="c1"
+    htmlFor="test"
+  >
+    
+  </label>
+  <textarea
+    className="c2"
+    id="test"
+    onChange={[Function]}
+    type="text"
+    value="val"
+  />
+  <div
+    className="c3"
+  >
+    
+  </div>
+</div>
+`;
