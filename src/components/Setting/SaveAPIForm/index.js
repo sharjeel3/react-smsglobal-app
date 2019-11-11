@@ -10,12 +10,20 @@ import {
   API_DISPLAY_NAME_FIELD,
   API_SECRET_FIELD
 } from '../../../constants/formFields';
+import PropTypes from 'prop-types';
 
-export const SaveAPIForm = () => {
+export const SaveAPIForm = props => {
+  const { onSaveClick } = props;
+
   const { handleChange: reduxChangeHandler } = useSaveAPIFormHook();
 
   const handleValueChange = field => value => {
     reduxChangeHandler(field, value);
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    onSaveClick();
   };
 
   const apiKeyState = useSelector(getFieldState(API_KEY_FIELD));
@@ -23,7 +31,7 @@ export const SaveAPIForm = () => {
   const apiDisplayNameState = useSelector(getFieldState(API_DISPLAY_NAME_FIELD));
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <TextInput
         id="api-key-input"
         label="API key"
@@ -48,4 +56,8 @@ export const SaveAPIForm = () => {
       <Button>Save</Button>
     </Form>
   );
+};
+
+SaveAPIForm.propTypes = {
+  onSaveClick: PropTypes.func.isRequired
 };
