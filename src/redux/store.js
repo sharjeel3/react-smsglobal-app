@@ -4,9 +4,9 @@ import { createLogger } from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { appSaga } from './sagas';
 
-const sagaMiddleware = createSagaMiddleware()
+const sagaMiddleware = createSagaMiddleware();
 
-const storeMiddleware = [sagaMiddleware]
+const storeMiddleware = [sagaMiddleware];
 
 if (process.env.NODE_ENV !== 'production') {
   storeMiddleware.push(createLogger());
