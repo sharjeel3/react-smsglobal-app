@@ -39,6 +39,15 @@ export const SendMessageForm = () => {
   const messageToState = useSelector(getFieldState(MESSAGE_TO_FIELD));
   const messageTextState = useSelector(getFieldState(MESSAGE_TEXT_FIELD));
 
+  const remainingMessage =
+    messageTextState.value.length <= 160
+      ? `${160 - messageTextState.value.length} characters left`
+      : `${messageTextState.value.length} characters. Message will be sent in ${Math.ceil(
+          messageTextState.value.length / 160
+        )} parts`;
+
+  const textContentMessage = messageTextState.message ? messageTextState.message : remainingMessage;
+
   return (
     <Form onSubmit={handleSubmit}>
       <Text heading>Send Message</Text>
@@ -69,7 +78,7 @@ export const SendMessageForm = () => {
             required
             onChange={handleValueChange(MESSAGE_TEXT_FIELD)}
             value={messageTextState.value}
-            message={messageTextState.message}
+            message={textContentMessage}
           />
           <Button>Send</Button>
         </>
