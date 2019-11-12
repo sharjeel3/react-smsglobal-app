@@ -10,16 +10,17 @@ export const useNotifyHook = () => {
   const getResetNotify = () => ({
     isActive: false,
     message: '',
-    timerId: null
+    timerId: null,
+    isError: false
   });
 
   const clearAfterWait = () => {
     return setTimeout(() => {
-      dispatch(updateNotifyStatus({ ...getResetNotify() }))
-    }, 2000);
+      dispatch(updateNotifyStatus({ ...getResetNotify() }));
+    }, 2500);
   };
 
-  const notifyUser = message => {
+  const notifyUser = (message, isError) => {
     if (isActive) {
       // if there is a previously active message, just clear that timer
       clearTimeout(timerId);
@@ -29,6 +30,7 @@ export const useNotifyHook = () => {
       updateNotifyStatus({
         isActive: true,
         message,
+        isError,
         timerId: newTimerId
       })
     );

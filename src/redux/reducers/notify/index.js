@@ -3,7 +3,8 @@ import { UPDATE_NOTIFY } from '../../../constants/actionTypes';
 const initialState = {
   isActive: false,
   message: '',
-  timerId: null
+  timerId: null,
+  isError: false
 };
 
 export const notifyReducer = (state = initialState, action) => {
@@ -13,7 +14,8 @@ export const notifyReducer = (state = initialState, action) => {
         ...state,
         isActive: action.payload.isActive,
         message: action.payload.message,
-        timerId: action.payload.timerId
+        timerId: action.payload.timerId,
+        isError: action.payload.isError
       };
     default:
       return state;

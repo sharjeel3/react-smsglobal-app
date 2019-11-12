@@ -8,12 +8,14 @@ import { useSelector } from 'react-redux';
 import { getNotifyState } from '../../redux/selectors';
 
 export const Layout = ({ children }) => {
-  const { isActive } = useSelector(getNotifyState);
+  const { isActive, message, isError } = useSelector(getNotifyState);
 
   return (
     <>
       <Header />
-      <Notify isActive={isActive}>Message Sent!</Notify>
+      <Notify isError={isError} isActive={isActive}>
+        {message}
+      </Notify>
       <Wrapper>
         <Aside>
           <Navigation />

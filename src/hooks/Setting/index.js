@@ -6,8 +6,10 @@ import {
   API_DISPLAY_NAME_FIELD
 } from '../../constants/formFields';
 import { LocalStorage } from '../../lib/LocalStorage';
+import { useNotifyHook } from '../Notify';
 
 export const useSettingHook = () => {
+  const { notifyUser } = useNotifyHook();
   const { isConfigReady, apiKey, apiSecret, apiDisplayName, hasValidSettings } = useSelector(
     getApiConfig
   );
@@ -18,11 +20,13 @@ export const useSettingHook = () => {
   const apiDisplayNameValue = useSelector(getFieldValue(API_DISPLAY_NAME_FIELD));
 
   const handleSaveClick = () => {
-    return (
+    const didSave =
       LocalStorage.save(API_KEY_FIELD, apiKeyValue) &&
       LocalStorage.save(API_SECRET_FIELD, apiSecretValue) &&
-      LocalStorage.save(API_DISPLAY_NAME_FIELD, apiDisplayNameValue)
-    );
+      LocalStorage.save(API_DISPLAY_NAME_FIELD, apiDisplayNameValue);
+    const message = didSave ? 'Settings saved' : 'Something went wrong!';
+    notifyUser(message, !didSave);
+    return didSave;
   };
 
   return { handleSaveClick, hasSettings, apiKey, apiSecret, apiDisplayName };
