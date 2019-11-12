@@ -15,7 +15,7 @@ export const useGetMessageHook = () => {
     if (hasSettings) {
       dispatch(getMessage());
     }
-  }, [dispatch, isConfigReady, hasValidSettings]);
+  }, [dispatch, hasSettings]);
 
   const messages = useSelector(getSentMessagesList);
   const isLoading = useSelector(getIsLoading(GET_MESSAGE))
