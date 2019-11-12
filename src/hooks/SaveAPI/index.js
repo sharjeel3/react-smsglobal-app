@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
-import { updateFormField } from '../../redux/actions/form';
+import { updateFormField, updatePartialFormField } from '../../redux/actions/form';
+import { FormModule } from '../../lib/Form';
 
 export const useSaveAPIFormHook = () => {
   const dispatch = useDispatch();
@@ -11,10 +12,22 @@ export const useSaveAPIFormHook = () => {
           field,
           value,
           touch: true,
-          message: ''
+          message: FormModule.validate(field, value).message
         }
       })
     );
+  };
+
+  const updateFields = fieldsData => {
+    const length = fieldsData.length;
+    for (let ii = 0; ii < length; ii++) {
+      dispatch(
+        updatePartialFormField({
+          field: fieldsData[ii].field,
+          data: fieldsData[ii].data
+        })
+      );
+    }
   };
 
   const resetForm = fields => {
@@ -32,5 +45,5 @@ export const useSaveAPIFormHook = () => {
     dispatch(updateFormField(payload));
   };
 
-  return { handleChange, resetForm };
+  return { handleChange, resetForm, updateFields };
 };

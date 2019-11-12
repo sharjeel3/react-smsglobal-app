@@ -13,29 +13,39 @@ import {
 import PropTypes from 'prop-types';
 import { Text } from '../../../ui-library/Text';
 import { Warning } from './styles';
+import { FormModule } from '../../../lib/Form';
 
 export const SaveAPIForm = props => {
   const { onSaveClick, hasSettings } = props;
 
-  const { handleChange: reduxChangeHandler, resetForm } = useSaveAPIFormHook();
+  const { handleChange: reduxChangeHandler, resetForm, updateFields } = useSaveAPIFormHook();
 
   const handleValueChange = field => value => {
     reduxChangeHandler(field, value);
   };
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    const saveStatus = onSaveClick();
-    if (saveStatus === true) {
-      resetForm([API_KEY_FIELD, API_SECRET_FIELD, API_DISPLAY_NAME_FIELD]);
-    } else {
-      // TODO: raise error
-    }
-  };
-
   const apiKeyState = useSelector(getFieldState(API_KEY_FIELD));
   const apiSecretState = useSelector(getFieldState(API_SECRET_FIELD));
   const apiDisplayNameState = useSelector(getFieldState(API_DISPLAY_NAME_FIELD));
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    const keyValidation = FormModule.validate(API_KEY_FIELD, apiKeyState.value);
+    const secretValidation = FormModule.validate(API_SECRET_FIELD, apiKeyState.value);
+    const displayNameValidation = FormModule.validate(API_DISPLAY_NAME_FIELD, apiKeyState.value);
+    if (keyValidation.error || secretValidation.error || displayNameValidation.error) {
+      updateFields([
+        { field: API_KEY_FIELD, data: { ...keyValidation } },
+        { field: API_SECRET_FIELD, data: { ...secretValidation } },
+        { field: API_DISPLAY_NAME_FIELD, data: { ...displayNameValidation } }
+      ])
+      return;
+    }
+    const saveStatus = onSaveClick();
+    if (saveStatus === true) {
+      resetForm([API_KEY_FIELD, API_SECRET_FIELD, API_DISPLAY_NAME_FIELD]);
+    }
+  };
 
   return (
     <Form onSubmit={handleSubmit}>
