@@ -21,7 +21,8 @@ export const loadApiConfig = () => {
     payload: {
       [API_KEY_FIELD]: apiKey,
       [API_SECRET_FIELD]: apiSecret,
-      [API_DISPLAY_NAME_FIELD]: apiDisplayName
+      [API_DISPLAY_NAME_FIELD]: apiDisplayName,
+      isConfigReady: true
     }
   };
 };
