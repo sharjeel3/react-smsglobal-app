@@ -3,10 +3,11 @@ import { combinedReducer } from './reducers';
 import { createLogger } from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { appSaga } from './sagas';
+import { ReduxLoading } from '../lib/Loading';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const storeMiddleware = [sagaMiddleware];
+const storeMiddleware = [sagaMiddleware, ReduxLoading.loadingMiddleware];
 
 if (process.env.NODE_ENV !== 'production') {
   storeMiddleware.push(createLogger());
