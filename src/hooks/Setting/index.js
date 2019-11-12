@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getApiConfig, getFieldValue } from '../../redux/selectors';
 import {
   API_KEY_FIELD,
@@ -7,9 +7,13 @@ import {
 } from '../../constants/formFields';
 import { LocalStorage } from '../../lib/LocalStorage';
 import { useNotifyHook } from '../Notify';
+import { loadApiConfig } from '../../redux/actions/app';
 
 export const useSettingHook = () => {
+  const dispatch = useDispatch();
+
   const { notifyUser } = useNotifyHook();
+
   const { isConfigReady, apiKey, apiSecret, apiDisplayName, hasValidSettings } = useSelector(
     getApiConfig
   );
@@ -26,6 +30,7 @@ export const useSettingHook = () => {
       LocalStorage.save(API_DISPLAY_NAME_FIELD, apiDisplayNameValue);
     const message = didSave ? 'Settings saved' : 'Something went wrong!';
     notifyUser(message, !didSave);
+    dispatch(loadApiConfig());
     return didSave;
   };
 
