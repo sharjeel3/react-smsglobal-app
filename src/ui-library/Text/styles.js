@@ -9,6 +9,11 @@ export const NormalText = styled.p`
   &:last-child {
     margin-bottom: 0;
   }
+  ${props =>
+    props.bold &&
+    `
+      font-weight: bold;
+  `}
 `;
 
 export const Heading = styled.h2`
@@ -18,10 +23,4 @@ export const Heading = styled.h2`
   margin-bottom: 0.5em;
 `;
 
-export const CardText = styled(NormalText)`
-  ${props =>
-    props.bold &&
-    `
-      font-weight: bold;
-  `}
-`;
+export const CardText = NormalText;

@@ -1,7 +1,10 @@
 import { LOAD_API_CONFIG } from '../../../constants/actionTypes';
 
 const initialState = {
-  api: {}
+  api: {
+    isConfigReady: undefined,
+    hasValidSettings: undefined
+  }
 };
 
 export const appReducer = (state = initialState, action) => {

@@ -6,6 +6,11 @@ import {
 } from '../../../constants/formFields';
 import { LocalStorage } from '../../../lib/LocalStorage';
 
+const getHasValidSettings = ({ isConfigReady, apiKey, apiSecret, apiDisplayName }) => {
+  const isValid = stuff => stuff.length > 0;
+  return isConfigReady && isValid(apiKey) && isValid(apiSecret) && isValid(apiDisplayName);
+};
+
 export const getApiData = () => {
   const apiKey = LocalStorage.get(API_KEY_FIELD) || '';
   const apiSecret = LocalStorage.get(API_SECRET_FIELD) || '';
@@ -16,13 +21,22 @@ export const getApiData = () => {
 
 export const loadApiConfig = () => {
   const { apiKey, apiSecret, apiDisplayName } = getApiData();
+  const isConfigReady = true;
+  const hasValidSettings = getHasValidSettings({
+    isConfigReady,
+    apiKey,
+    apiSecret,
+    apiDisplayName
+  });
+
   return {
     type: LOAD_API_CONFIG,
     payload: {
       [API_KEY_FIELD]: apiKey,
       [API_SECRET_FIELD]: apiSecret,
       [API_DISPLAY_NAME_FIELD]: apiDisplayName,
-      isConfigReady: true
+      isConfigReady,
+      hasValidSettings
     }
   };
 };

@@ -15,11 +15,14 @@ const getTextComponent = props => {
 };
 
 export const Text = props => {
-  const { children, cardText, bold, heading } = props;
+  const { children, cardText, bold, heading, className } = props;
 
   const C = getTextComponent({ cardText, heading });
 
-  const textProps = { bold };
+  const textProps = {
+    bold,
+    ...(className && { className })
+  };
 
   return <C {...textProps}>{children}</C>;
 };
@@ -28,5 +31,6 @@ Text.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   cardText: PropTypes.bool,
   heading: PropTypes.bool,
-  bold: PropTypes.bool
+  bold: PropTypes.bool,
+  className: PropTypes.string
 };

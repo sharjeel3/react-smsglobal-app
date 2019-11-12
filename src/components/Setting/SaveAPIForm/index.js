@@ -11,9 +11,11 @@ import {
   API_SECRET_FIELD
 } from '../../../constants/formFields';
 import PropTypes from 'prop-types';
+import { Text } from '../../../ui-library/Text';
+import { Warning } from './styles';
 
 export const SaveAPIForm = props => {
-  const { onSaveClick } = props;
+  const { onSaveClick, hasSettings } = props;
 
   const { handleChange: reduxChangeHandler, resetForm } = useSaveAPIFormHook();
 
@@ -37,23 +39,25 @@ export const SaveAPIForm = props => {
 
   return (
     <Form onSubmit={handleSubmit}>
+      <Text heading>Add a new API key</Text>
+      {hasSettings ? <Warning>Note: It will override existing settings</Warning> : null}
       <TextInput
         id="api-key-input"
-        label="API key"
+        label="API key *"
         onChange={handleValueChange(API_KEY_FIELD)}
         value={apiKeyState.value}
         message={apiKeyState.message}
       />
       <TextInput
         id="api-secret-input"
-        label="API secret"
+        label="API secret *"
         onChange={handleValueChange(API_SECRET_FIELD)}
         value={apiSecretState.value}
         message={apiSecretState.message}
       />
       <TextInput
         id="display-name-input"
-        label="Display name"
+        label="Display name *"
         onChange={handleValueChange(API_DISPLAY_NAME_FIELD)}
         value={apiDisplayNameState.value}
         message={apiDisplayNameState.message}
@@ -64,5 +68,6 @@ export const SaveAPIForm = props => {
 };
 
 SaveAPIForm.propTypes = {
-  onSaveClick: PropTypes.func.isRequired
+  onSaveClick: PropTypes.func.isRequired,
+  hasSettings: PropTypes.bool.isRequired
 };

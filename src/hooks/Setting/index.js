@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { getFieldValue } from '../../redux/selectors';
+import { getApiConfig, getFieldValue } from '../../redux/selectors';
 import {
   API_KEY_FIELD,
   API_SECRET_FIELD,
@@ -8,6 +8,11 @@ import {
 import { LocalStorage } from '../../lib/LocalStorage';
 
 export const useSettingHook = () => {
+  const { isConfigReady, apiKey, apiSecret, apiDisplayName, hasValidSettings } = useSelector(
+    getApiConfig
+  );
+  const hasSettings = isConfigReady && hasValidSettings;
+
   const apiKeyValue = useSelector(getFieldValue(API_KEY_FIELD));
   const apiSecretValue = useSelector(getFieldValue(API_SECRET_FIELD));
   const apiDisplayNameValue = useSelector(getFieldValue(API_DISPLAY_NAME_FIELD));
@@ -20,5 +25,5 @@ export const useSettingHook = () => {
     );
   };
 
-  return { handleSaveClick };
+  return { handleSaveClick, hasSettings, apiKey, apiSecret, apiDisplayName };
 };

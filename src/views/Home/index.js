@@ -5,13 +5,13 @@ import { getApiConfig } from '../../redux/selectors';
 import { ContentLoader } from '../../ui-library/ContentLoader';
 
 const HomeView = () => {
-  const { isConfigReady } = useSelector(getApiConfig);
-
+  const { isConfigReady, hasValidSettings } = useSelector(getApiConfig);
   if (typeof isConfigReady === 'undefined') return <ContentLoader />;
 
-  const message = isConfigReady
-    ? `We already have your settings saved here. Start by sending a message.`
-    : 'Start by saving your settings first.';
+  const message =
+    isConfigReady && hasValidSettings
+      ? `We already have your settings saved here. Start by sending a message.`
+      : 'Start by saving your settings first.';
 
   return (
     <>
