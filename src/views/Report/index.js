@@ -1,5 +1,8 @@
+import React from 'react';
+import { MessageReport } from '../../components/Report';
+
 const ReportView = () => {
-  return 'report';
+  return <MessageReport />;
 };
 
 // React lazy requires default export
