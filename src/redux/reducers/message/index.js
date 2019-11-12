@@ -1,6 +1,6 @@
 import {
   GET_MESSAGE_SUCCEEDED,
-  REFRESH_STATE_ITEM,
+  REFRESH_STATE_ITEM, SEND_MESSAGE_FAILED,
   SEND_MESSAGE_SUCCEEDED
 } from '../../../constants/actionTypes';
 
@@ -24,7 +24,13 @@ export const messageReducer = (state = initialState, action) => {
       return {
         ...state,
         sendResponse: { ...action.response },
+        sendError: null,
         isSent: action.isSent
+      };
+    case SEND_MESSAGE_FAILED:
+      return {
+        ...state,
+        sendError: action.error
       };
     case REFRESH_STATE_ITEM:
       return {

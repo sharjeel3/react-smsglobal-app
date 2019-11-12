@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getApiConfig, getFieldValue, getIsMessageSent } from '../../redux/selectors';
+import { getApiConfig, getFieldValue, getIsMessageSent, getMessageSendError } from '../../redux/selectors';
 import {
   MESSAGE_TO_FIELD,
   MESSAGE_TEXT_FIELD,
@@ -15,6 +15,8 @@ export const useSendMessageHook = () => {
   const { notifyUser } = useNotifyHook();
 
   const isSent = useSelector(getIsMessageSent);
+
+  const sendError = useSelector(getMessageSendError);
 
   useEffect(() => {
     if (isSent) {
@@ -34,5 +36,10 @@ export const useSendMessageHook = () => {
     dispatch(sendMessage(messageFromValue, messageToValue, messageTextValue));
   };
 
-  return { onSendClick: handleSendClick, hasSettings: isConfigReady && hasValidSettings, isSent };
+  return {
+    onSendClick: handleSendClick,
+    hasSettings: isConfigReady && hasValidSettings,
+    isSent,
+    sendError
+  };
 };

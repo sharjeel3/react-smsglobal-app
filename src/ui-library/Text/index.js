@@ -15,12 +15,13 @@ const getTextComponent = props => {
 };
 
 export const Text = props => {
-  const { children, cardText, bold, heading, className } = props;
+  const { children, cardText, bold, heading, className, error } = props;
 
   const C = getTextComponent({ cardText, heading });
 
   const textProps = {
     bold,
+    error,
     ...(className && { className })
   };
 
@@ -32,5 +33,6 @@ Text.propTypes = {
   cardText: PropTypes.bool,
   heading: PropTypes.bool,
   bold: PropTypes.bool,
+  error: PropTypes.bool,
   className: PropTypes.string
 };

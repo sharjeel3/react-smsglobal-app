@@ -14,6 +14,11 @@ export const NormalText = styled.p`
     `
       font-weight: bold;
   `}
+  ${props =>
+    props.error &&
+    `
+      color: ${brandColors.red};
+  `}
 `;
 
 export const Heading = styled.h2`

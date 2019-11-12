@@ -13,9 +13,10 @@ import {
 import { useSendMessageFormHook } from '../../hooks/SendMessageForm';
 import { useSendMessageHook } from '../../hooks/SendMessage';
 import { Text } from '../../ui-library/Text';
+import { Errors } from '../Errors';
 
 export const SendMessageForm = () => {
-  const { onSendClick, hasSettings, isSent } = useSendMessageHook();
+  const { onSendClick, hasSettings, isSent, sendError } = useSendMessageHook();
 
   const { handleChange: reduxChangeHandler, resetForm } = useSendMessageFormHook();
 
@@ -41,6 +42,7 @@ export const SendMessageForm = () => {
   return (
     <Form onSubmit={handleSubmit}>
       <Text heading>Send Message</Text>
+      {sendError ? <Errors errors={sendError.errors} /> : null}
       {hasSettings ? (
         <>
           <TextInput

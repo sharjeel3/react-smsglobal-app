@@ -13,3 +13,5 @@ export const getApiConfig = store => store.app.api;
 export const getNotifyState = store => store.notify;
 
 export const getIsMessageSent = store => store.message.isSent || false;
+
+export const getMessageSendError = store => store.message.sendError;
