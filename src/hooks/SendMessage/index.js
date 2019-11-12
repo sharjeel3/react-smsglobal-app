@@ -6,7 +6,7 @@ import {
   MESSAGE_TEXT_FIELD,
   MESSAGE_FROM_FIELD
 } from '../../constants/formFields';
-import { sendMessage } from '../../redux/actions/message';
+import { sendMessage, refreshStateItem } from '../../redux/actions/message';
 import { useNotifyHook } from '../Notify';
 
 export const useSendMessageHook = () => {
@@ -18,9 +18,11 @@ export const useSendMessageHook = () => {
 
   useEffect(() => {
     if (isSent) {
+      // TODO: such side effects may be managed from saga
+      dispatch(refreshStateItem({ isSent: false }));
       notifyUser('Message sent');
     }
-  }, [isSent]);
+  }, [isSent, notifyUser, dispatch]);
 
   const messageFromValue = useSelector(getFieldValue(MESSAGE_FROM_FIELD));
   const messageToValue = useSelector(getFieldValue(MESSAGE_TO_FIELD));
@@ -32,5 +34,5 @@ export const useSendMessageHook = () => {
     dispatch(sendMessage(messageFromValue, messageToValue, messageTextValue));
   };
 
-  return { onSendClick: handleSendClick, hasSettings: isConfigReady && hasValidSettings };
+  return { onSendClick: handleSendClick, hasSettings: isConfigReady && hasValidSettings, isSent };
 };

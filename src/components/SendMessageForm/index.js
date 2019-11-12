@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TextInput } from '../../ui-library/TextInput';
 import { Form } from '../../ui-library/Form';
 import { Button } from '../../ui-library/Button';
@@ -15,9 +15,15 @@ import { useSendMessageHook } from '../../hooks/SendMessage';
 import { Text } from '../../ui-library/Text';
 
 export const SendMessageForm = () => {
-  const { onSendClick, hasSettings } = useSendMessageHook();
+  const { onSendClick, hasSettings, isSent } = useSendMessageHook();
 
-  const { handleChange: reduxChangeHandler } = useSendMessageFormHook();
+  const { handleChange: reduxChangeHandler, resetForm } = useSendMessageFormHook();
+
+  useEffect(() => {
+    if (isSent) {
+      resetForm([MESSAGE_FROM_FIELD, MESSAGE_TO_FIELD, MESSAGE_TEXT_FIELD]);
+    }
+  }, [isSent, resetForm]);
 
   const handleValueChange = field => value => {
     reduxChangeHandler(field, value);
