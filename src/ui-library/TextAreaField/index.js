@@ -5,7 +5,7 @@ import { FormError } from '../FormError';
 import { Root, TextArea } from './styles';
 
 export const TextAreaField = ({ ...props }) => {
-  const { onChange, type, value, label, id, message, hasError } = props;
+  const { onChange, type, value, label, id, message, hasError, required } = props;
 
   const handleChange = event => {
     onChange(event.target.value);
@@ -14,7 +14,14 @@ export const TextAreaField = ({ ...props }) => {
   return (
     <Root>
       <Label htmlFor={id}>{label}</Label>
-      <TextArea hasError={hasError} type={type} id={id} value={value} onChange={handleChange} />
+      <TextArea
+        required={required}
+        hasError={hasError}
+        type={type}
+        id={id}
+        value={value}
+        onChange={handleChange}
+      />
       <FormError>{message}</FormError>
     </Root>
   );
@@ -35,5 +42,6 @@ TextAreaField.propTypes = {
   type: PropTypes.string,
   id: PropTypes.string.isRequired,
   message: PropTypes.string,
-  hasError: PropTypes.bool
+  hasError: PropTypes.bool,
+  required: PropTypes.bool
 };

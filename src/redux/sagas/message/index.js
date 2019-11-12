@@ -16,7 +16,7 @@ function* sendMessageWorker(action) {
       // Most likely Api error
       return yield put({ type: SEND_MESSAGE_FAILED, error: error.response.data, response: null });
     }
-    yield put({ type: SEND_MESSAGE_SUCCEEDED, error: null, response });
+    yield put({ type: SEND_MESSAGE_SUCCEEDED, error: null, response: response, isSent: true });
   } catch (e) {
     // Something broke down
     yield put({ type: SEND_MESSAGE_FAILED, error: e.toString(), response: null });

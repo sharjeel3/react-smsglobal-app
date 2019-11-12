@@ -39,22 +39,26 @@ export const SendMessageForm = () => {
         <>
           <TextInput
             id="message-from-input"
-            label="From"
+            label="From - Alphabets only with 3 to 11 characters (optional)"
+            pattern="[A-Za-z]{3,11}"
             onChange={handleValueChange(MESSAGE_FROM_FIELD)}
             value={messageFromState.value}
             message={messageFromState.message}
           />
           <TextInput
             id="message-to-input"
-            label="To"
+            label="To *"
             type="number"
+            pattern=".{3,15}"
+            required
             onChange={handleValueChange(MESSAGE_TO_FIELD)}
             value={messageToState.value}
             message={messageToState.message}
           />
           <TextAreaField
             id="message-text-input"
-            label="Message Text"
+            label="Message Text *"
+            required
             onChange={handleValueChange(MESSAGE_TEXT_FIELD)}
             value={messageTextState.value}
             message={messageTextState.message}

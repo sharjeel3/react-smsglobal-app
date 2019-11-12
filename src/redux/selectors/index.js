@@ -11,3 +11,5 @@ export const getIsLoading = content => store => store.loading[content] || false;
 export const getApiConfig = store => store.app.api;
 
 export const getNotifyState = store => store.notify;
+
+export const getIsMessageSent = store => store.message.isSent || false;

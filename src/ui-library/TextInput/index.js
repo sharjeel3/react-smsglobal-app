@@ -5,7 +5,19 @@ import { FormError } from '../FormError';
 import { Root, Input } from './styles';
 
 export const TextInput = ({ ...props }) => {
-  const { onChange, type, value, label, id, message, hasError } = props;
+  const {
+    onChange,
+    type,
+    value,
+    label,
+    id,
+    message,
+    hasError,
+    min,
+    max,
+    pattern,
+    required
+  } = props;
 
   const handleChange = event => {
     onChange(event.target.value);
@@ -14,7 +26,17 @@ export const TextInput = ({ ...props }) => {
   return (
     <Root>
       <Label htmlFor={id}>{label}</Label>
-      <Input hasError={hasError} type={type} id={id} value={value} onChange={handleChange} />
+      <Input
+        min={min}
+        max={max}
+        pattern={pattern}
+        hasError={hasError}
+        type={type}
+        id={id}
+        value={value}
+        onChange={handleChange}
+        required={required}
+      />
       <FormError>{message}</FormError>
     </Root>
   );
@@ -35,5 +57,9 @@ TextInput.propTypes = {
   type: PropTypes.string,
   id: PropTypes.string.isRequired,
   message: PropTypes.string,
-  hasError: PropTypes.bool
+  min: PropTypes.string,
+  max: PropTypes.string,
+  pattern: PropTypes.string,
+  hasError: PropTypes.bool,
+  required: PropTypes.bool
 };
