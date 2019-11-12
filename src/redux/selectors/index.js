@@ -3,3 +3,5 @@ export const getFieldState = field => store => {
   return { message, value };
 };
 export const getFieldValue = field => store => (store.form[field] || {}).value;
+
+export const getSentMessagesList = store => store.message.sentMessages.messages || [];

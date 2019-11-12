@@ -1,18 +1,19 @@
-import { SEND_MESSAGE_REQUESTED } from '../../../constants/actionTypes';
+import { GET_MESSAGE_SUCCEEDED } from '../../../constants/actionTypes';
 
 const initialState = {
   isSending: false,
   sendError: null,
   isSent: false,
-  sendResponse: null
+  sendResponse: null,
+  sentMessages: {}
 };
 
 export const messageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SEND_MESSAGE_REQUESTED:
+    case GET_MESSAGE_SUCCEEDED:
       return {
         ...state,
-        isSending: action.isSending
+        sentMessages: { ...action.response }
       };
     default:
       return state;
