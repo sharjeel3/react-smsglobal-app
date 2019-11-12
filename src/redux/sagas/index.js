@@ -1,5 +1,6 @@
-import { takeLatest } from 'redux-saga/effects';
+import { all } from 'redux-saga/effects';
+import { messageSagas } from './message';
 
 export function* appSaga() {
-  yield takeLatest('TEST', () => {});
+  yield all([...messageSagas]);
 }
