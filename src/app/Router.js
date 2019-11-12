@@ -6,6 +6,7 @@ const SettingView = React.lazy(() => import('../views/Setting'));
 const SendMessageView = React.lazy(() => import('../views/SendMessage'));
 const ReportView = React.lazy(() => import('../views/Report'));
 const HomeView = React.lazy(() => import('../views/Home'));
+const NotFoundView = React.lazy(() => import('../views/NotFound'));
 
 export const Router = () => {
   return (
@@ -22,8 +23,11 @@ export const Router = () => {
             <Route path="/report">
               <ReportView />
             </Route>
-            <Route path="/">
+            <Route exact path="/">
               <HomeView />
+            </Route>
+            <Route path="/">
+              <NotFoundView />
             </Route>
           </Switch>
         </Suspense>
