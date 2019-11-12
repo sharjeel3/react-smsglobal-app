@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getMessage } from '../../redux/actions/message';
-import { getSentMessagesList } from '../../redux/selectors';
+import { getIsLoading, getSentMessagesList } from '../../redux/selectors';
+import { GET_MESSAGE } from '../../constants/contentTypes';
 
 export const useGetMessageHook = () => {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ export const useGetMessageHook = () => {
   }, [dispatch]);
 
   const messages = useSelector(getSentMessagesList);
+  const isLoading = useSelector(getIsLoading(GET_MESSAGE))
 
-  return { messages };
+  return { messages, isLoading };
 };

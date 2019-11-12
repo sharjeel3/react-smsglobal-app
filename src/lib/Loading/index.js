@@ -1,4 +1,4 @@
-import { UPDATE_LOADING } from '../../constants/actionTypes';
+import { updateLoading } from '../../redux/actions/loading';
 
 export const ReduxLoading = (() => {
   const loadingMiddleware = store => next => action => {
@@ -13,12 +13,7 @@ export const ReduxLoading = (() => {
 
     if (isLoading || isFinished) {
       const content = type.replace(/_REQUESTED|_SUCCEEDED|_FAILED/, '');
-      store.dispatch({
-        type: UPDATE_LOADING,
-        payload: {
-          [content]: isLoading
-        }
-      });
+      store.dispatch(updateLoading(content, isLoading));
     }
 
     next(action);

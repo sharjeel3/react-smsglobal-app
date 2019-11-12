@@ -4,9 +4,12 @@ import { Text } from '../../ui-library/Text';
 import { MessageHistory } from './MessageHistory';
 import { MessageStats } from './MessageStats';
 import { Wrapper, Column } from './styles';
+import { ContentLoader } from '../../ui-library/ContentLoader';
 
 export const MessageReport = () => {
-  const { messages } = useGetMessageHook();
+  const { messages, isLoading } = useGetMessageHook();
+  if (isLoading) return <ContentLoader />;
+
   return (
     <Wrapper>
       <Column>
