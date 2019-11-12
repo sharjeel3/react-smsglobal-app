@@ -7,7 +7,7 @@ import configureStore from 'redux-mock-store';
 describe('React App', () => {
   it('renders without crashing', () => {
     const mockStore = configureStore();
-    const initialState = { app: {}, form: {} };
+    const initialState = { app: { api: {} }, form: {}, loading: {}, message: {}, notify: {} };
     const store = mockStore(initialState);
     const div = document.createElement('div');
     ReactDOM.render(

@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { getNotifyState } from '../../redux/selectors';
 
 export const Layout = ({ children }) => {
-  const { isActive, message, isError } = useSelector(getNotifyState);
+  const { isActive, message = '', isError } = useSelector(getNotifyState);
 
   return (
     <>
