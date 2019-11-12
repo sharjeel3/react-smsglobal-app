@@ -36,7 +36,6 @@ export const SendMessageForm = props => {
       <TextInput
         id="message-from-input"
         label="From"
-        type="number"
         onChange={handleValueChange(MESSAGE_FROM_FIELD)}
         value={messageFromState.value}
         message={messageFromState.message}
