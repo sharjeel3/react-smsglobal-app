@@ -10,11 +10,12 @@ export const MessageHistory = props => {
     <>
       {messages &&
         messages.map((message, ii) => {
-          const { dateTime, origin, status, destination } = message;
+          const { dateTime, origin, status, destination, message: content } = message;
           return (
             <Card key={`${destination}${ii}`}>
               <Text>From: {origin}</Text>
               <Text>To: {destination}</Text>
+              <Text>Content: {content}</Text>
               <Text>Status: {status}</Text>
               <Text>Date: {dateTime}</Text>
             </Card>
