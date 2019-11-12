@@ -1,5 +1,4 @@
 import React from 'react';
-import { Container } from '../../ui-library/Container';
 import { useGetMessageHook } from '../../hooks/GetMessage';
 import { Text } from '../../ui-library/Text';
 import { MessageHistory } from './MessageHistory';
