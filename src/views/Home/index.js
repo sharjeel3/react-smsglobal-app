@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import { Text } from '../../ui-library/Text';
 import { useSelector } from 'react-redux';
 import { getApiConfig } from '../../redux/selectors';
