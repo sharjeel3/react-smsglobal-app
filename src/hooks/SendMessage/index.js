@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { getFieldValue } from '../../redux/selectors';
+import { getApiConfig, getFieldValue } from '../../redux/selectors';
 import {
   MESSAGE_TO_FIELD,
   MESSAGE_TEXT_FIELD,
@@ -14,9 +14,11 @@ export const useSendMessageHook = () => {
   const messageToValue = useSelector(getFieldValue(MESSAGE_TO_FIELD));
   const messageTextValue = useSelector(getFieldValue(MESSAGE_TEXT_FIELD));
 
+  const { isConfigReady, hasValidSettings } = useSelector(getApiConfig);
+
   const handleSendClick = () => {
     dispatch(sendMessage(messageFromValue, messageToValue, messageTextValue));
   };
 
-  return { onSendClick: handleSendClick };
+  return { onSendClick: handleSendClick, hasSettings: isConfigReady && hasValidSettings };
 };

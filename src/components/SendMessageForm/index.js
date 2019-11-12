@@ -12,9 +12,10 @@ import {
 } from '../../constants/formFields';
 import { useSendMessageFormHook } from '../../hooks/SendMessageForm';
 import { useSendMessageHook } from '../../hooks/SendMessage';
+import { Text } from '../../ui-library/Text';
 
-export const SendMessageForm = props => {
-  const { onSendClick } = useSendMessageHook();
+export const SendMessageForm = () => {
+  const { onSendClick, hasSettings } = useSendMessageHook();
 
   const { handleChange: reduxChangeHandler } = useSendMessageFormHook();
 
@@ -33,31 +34,36 @@ export const SendMessageForm = props => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <TextInput
-        id="message-from-input"
-        label="From"
-        onChange={handleValueChange(MESSAGE_FROM_FIELD)}
-        value={messageFromState.value}
-        message={messageFromState.message}
-      />
-      <TextInput
-        id="message-to-input"
-        label="To"
-        type="number"
-        onChange={handleValueChange(MESSAGE_TO_FIELD)}
-        value={messageToState.value}
-        message={messageToState.message}
-      />
-      <TextAreaField
-        id="message-text-input"
-        label="Message Text"
-        onChange={handleValueChange(MESSAGE_TEXT_FIELD)}
-        value={messageTextState.value}
-        message={messageTextState.message}
-      />
-      <Button>Send</Button>
+      <Text heading>Send Message</Text>
+      {hasSettings ? (
+        <>
+          <TextInput
+            id="message-from-input"
+            label="From"
+            onChange={handleValueChange(MESSAGE_FROM_FIELD)}
+            value={messageFromState.value}
+            message={messageFromState.message}
+          />
+          <TextInput
+            id="message-to-input"
+            label="To"
+            type="number"
+            onChange={handleValueChange(MESSAGE_TO_FIELD)}
+            value={messageToState.value}
+            message={messageToState.message}
+          />
+          <TextAreaField
+            id="message-text-input"
+            label="Message Text"
+            onChange={handleValueChange(MESSAGE_TEXT_FIELD)}
+            value={messageTextState.value}
+            message={messageTextState.message}
+          />
+          <Button>Send</Button>
+        </>
+      ) : (
+        <Text>Settings not found. Save your settings before you can send a message.</Text>
+      )}
     </Form>
   );
 };
-
-SendMessageForm.propTypes = {};
