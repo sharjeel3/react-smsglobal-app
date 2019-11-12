@@ -2,7 +2,7 @@ import { Axios } from '../../Axios';
 
 export const getMessageApi = async payload => {
   const [error, response] = await Axios.fetch({
-    uri: '/v2/sms/',
+    uri: '/v2/sms/?limit=5',
     data: payload
   });
 
