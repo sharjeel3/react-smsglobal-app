@@ -12,8 +12,9 @@ describe('REDUCER - APP', () => {
       hasValidSettings: true
     }
   };
+
   it('should update api config', () => {
-    expect(appReducer(undefined, action)).toEqual({
+    expect(appReducer({}, action)).toEqual({
       api: { ...action.payload }
     });
   });
