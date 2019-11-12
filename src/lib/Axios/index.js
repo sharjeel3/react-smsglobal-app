@@ -35,7 +35,7 @@ export const Axios = (() => {
         ...headers
       }
     })
-      .then(response => [null, response])
+      .then(response => [null, response.data])
       .catch(error => [error, null]);
   };
 
