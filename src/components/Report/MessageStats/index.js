@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { Dropdown } from '../../../ui-library/Dropdown';
 import { Card } from '../../../ui-library/Card';
 import { Text } from '../../../ui-library/Text';
+import { useMessageStatsHook } from '../../../hooks/MessageStats';
 
 const messagePeriodOptions = [
   { name: '24 hours', value: 24 },
@@ -12,30 +12,8 @@ const messagePeriodOptions = [
   { name: '7 days', value: 120 }
 ];
 
-export const MessageStats = props => {
-  const [period, setPeriod] = useState(24);
-  const { messages } = props;
-
-  const count = {
-    sent: 0,
-    delivered: 0,
-    undelivered: 0,
-    failed: 0
-  };
-
-  const filteredMessages = messages.filter(message => {
-    const messageTimestamp = Math.round(new Date(message.dateTime).getTime() / 1000);
-    const currentTimestamp = Math.round(new Date().getTime() / 1000);
-    const timeDifference = currentTimestamp - messageTimestamp;
-    const periodSeconds = period * 3600;
-    const filtered = timeDifference < periodSeconds;
-    if (filtered) count[message.status]++;
-    return filtered;
-  });
-
-  const handlePeriodChange = value => {
-    setPeriod(Number(value));
-  };
+export const MessageStats = () => {
+  const { period, onPeriodChange, count, filteredMessages } = useMessageStatsHook();
 
   return (
     <>
@@ -44,7 +22,7 @@ export const MessageStats = props => {
         value={period}
         label="Select Period"
         id="message-period-option"
-        onChange={handlePeriodChange}
+        onChange={onPeriodChange}
       />
       <Card>
         <Text>Total: {filteredMessages.length}</Text>
@@ -55,8 +33,4 @@ export const MessageStats = props => {
       </Card>
     </>
   );
-};
-
-MessageStats.propTypes = {
-  messages: PropTypes.array.isRequired
 };

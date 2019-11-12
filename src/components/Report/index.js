@@ -7,19 +7,25 @@ import { Wrapper, Column } from './styles';
 import { ContentLoader } from '../../ui-library/ContentLoader';
 
 export const MessageReport = () => {
-  const { messages, isLoading } = useGetMessageHook();
+  const { messages, isLoading, hasSettings } = useGetMessageHook();
   if (isLoading) return <ContentLoader />;
 
   return (
     <Wrapper>
-      <Column>
-        <Text heading>Message Statistics</Text>
-        <MessageStats messages={messages} />
-      </Column>
-      <Column>
-        <Text heading>Message History</Text>
-        <MessageHistory messages={messages} />
-      </Column>
+      {hasSettings ? (
+        <>
+          <Column>
+            <Text heading>Message Statistics</Text>
+            <MessageStats />
+          </Column>
+          <Column>
+            <Text heading>Message History</Text>
+            <MessageHistory messages={messages} />
+          </Column>
+        </>
+      ) : (
+        <Text>Settings not found. Save your settings before you can view reports.</Text>
+      )}
     </Wrapper>
   );
 };
