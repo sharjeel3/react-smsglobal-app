@@ -1,11 +1,13 @@
-import React from 'react';
+import React  from 'react';
 import { Text } from '../../ui-library/Text';
 import { useSelector } from 'react-redux';
 import { getApiConfig } from '../../redux/selectors';
 import { ContentLoader } from '../../ui-library/ContentLoader';
+import { Container } from '../../ui-library/Container';
 
 const HomeView = () => {
   const { isConfigReady, hasValidSettings } = useSelector(getApiConfig);
+
   if (typeof isConfigReady === 'undefined') return <ContentLoader />;
 
   const message =
@@ -14,10 +16,10 @@ const HomeView = () => {
       : 'Start by saving your settings first.';
 
   return (
-    <>
+    <Container>
       <Text heading>Welcome to SMSGlobal</Text>
       <Text>{message}</Text>
-    </>
+    </Container>
   );
 };
 
