@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header } from '../../ui-library/Header';
 import PropTypes from 'prop-types';
-import { Wrapper } from './styles';
+import { Wrapper, Aside, Content } from './styles';
 import { Navigation } from '../../components/Navigation';
 
 export const Layout = ({ children }) => {
@@ -9,10 +9,10 @@ export const Layout = ({ children }) => {
     <>
       <Header />
       <Wrapper>
-        <div className="aside">
+        <Aside>
           <Navigation />
-        </div>
-        <div className="content">{children}</div>
+        </Aside>
+        <Content>{children}</Content>
       </Wrapper>
     </>
   );
