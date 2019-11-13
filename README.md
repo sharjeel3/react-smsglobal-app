@@ -10,9 +10,7 @@ This project is bootstrapped with [Create React App](https://github.com/facebook
 
 ## Show me the app
 
-This project is deployed on Netlify for you to use and send messages. Visit this URL https://react-smsglobal-app.netlify.com/ <br />
-
-If you would like to run it locally, follow these instructions:
+Follow these instructions to run it locally:
 1. You will need Node.js and npm installed on your machine. I have built and tested the application using Node.js version 10.16.3 and npm version 6.9.0. Download link is here https://nodejs.org/download/release/v10.16.3/. Do you want to use yarn? I'm sure you can.
 2. Open a terminal and switch to project directory
 3. Install dependencies using `npm install`
@@ -109,9 +107,10 @@ These are simply dumb UI components that should be reused and linked off to a de
 Components can be defined as building blocks of our views. Components use parts from UI library to create a useful interface. Components can 'use' any hook to get appropriate props and handler functions to render UI as well as make it interactive.
 
 ## What's there for future
+This app is not ready for production use. Following points make it clear:
 
 * Have not done much work on responsive styling. Can do more there with grid, typography and overall styles
-* Can add unit tests throughout the app especially around hooks
+* Can add tests throughout the app especially around hooks, sagas and integration tests
 * Project is using create-react-app tool for development and build. While this is easy to use, it may not be feasible option in an environment where we need customisations to build steps for CI/CD. A custom webpack configuration would be needed otherwise.
 * UI Library should be linked to components in design system with storybook or something similar.
 * Animations can be added as required
@@ -125,3 +124,6 @@ Components can be defined as building blocks of our views. Components use parts 
 * Reports page should use pagination and allow for better statistics reporting using charts and using data over longer period of time
 * Can add loading states on Send Message form
 * Can avoid using `display: none` using React conditional rendering based on a viewport
+* Can namespace keys in Local Storage
+* REST API integration is using HTTP which should be changed to HTTPS
+* You will notice one Saga is not using action creators, instead it is putting actions directly. This can be improved
