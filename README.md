@@ -1,5 +1,5 @@
 # SMSGlobal Messaging App 
-This app allows you to send messages using SMSGlobal REST API. <br /> It is built with:
+This app allows you to send messages using SMSGlobal REST API. It is built with:
 
 * React 16.11.0 and React Hooks
 * Redux and Redux Saga
@@ -58,8 +58,7 @@ Polyfills for IE11 are not currently included. Please use latest version of Goog
 
 ## Approach
 * You might find the business logic approach a bit unusual as compared to most production React apps at the moment. The solution relies on React Hooks to provide the props and callbacks the views can 'use'. This is done specifically to improve code composition and follow better functional programming pattern while avoiding classes.
-* I have added a UI library for base level user interface components.
-* My focus was to showcase React app architecture and building business logic in React using Hooks
+* My focus was to showcase React app architecture and building business logic in React using Hooks. You will notice a lot of emphasis on functional programming patterns.  
 * Form inputs are controlled and do not store any local state
 * App is using prop-types for props validation
 * Code styling and formatting options can be seen in eslint and prettier config
@@ -69,7 +68,10 @@ Polyfills for IE11 are not currently included. Please use latest version of Goog
 * Have used React Router for routing
 * Have used React Lazy and Suspense for code splitting based on routes. This is enough when we do not need server side rendering.
 * Have used Local Storage to save API keys in browser
-* Have limited From input in Send Message form to alphabets only. Read more about it in the Future section
+* Have limited From input in Send Message form to alphabets only. Read more about it in the Future section below
+* Have created a notify state in redux to handle notifications nicely. A hook is added to manage it.
+* Have preferred named exports to follow components easily (either with linter, debugger or just looking at it)
+* Have kept styled components in respective `styles.js` to avoid clutter in main components
 
 ## Architecture
 
@@ -83,19 +85,22 @@ You can think of views as pages. However a view may be used for more than a page
 ### Redux
 It provides all components necessary for managing state with Redux. <br />
 
-**Actions:** These include Redux action creator. Convention is to provide pure functions as action creators. A note that this is not the place to handle async code.<br />
-**Reducers:** These includes all Redux reducers that are combined using a helper from Redux. These are also pure functions.<br />
-**Selectors:** These are resolver functions that can be used with `useSelector` hook to fetch state from Redux store<br />
-**Sagas:** We are using Redux Saga for async logic with Redux. This is where we have logic to listen to actions and initiate API requests if needed<br />
+* **Actions:** These include Redux action creator. Convention is to provide pure functions as action creators. A note that this is not the place to handle async requests.<br />
+* **Reducers:** These includes all Redux reducers that are combined using a helper from Redux. These are also pure functions.<br />
+* **Selectors:** These are resolver functions that can be used with `useSelector` hook to fetch state from Redux store<br />
+* **Sagas:** We are using Redux Saga for async logic with Redux. This is where we have wait for the actions requiring async functionality and initiate API requests as needed<br />
 
 ### Lib
 These are essentially ES6 modules that we can use for specific functionality like making network requests, handling storage and creating API requests.
 
+### Constants
+Anything like strings that we can need to use across the app can be put here.
+
 ### Hooks
 You will notice that hooks are extensively used for managing business logic throughout the app. The approach is to add hooks that views can access to either get data or get callback handlers. <br />
 Some points to note about hooks are below:
-* This pattern allows the code to read better, allows for awesome functional composition and will lead to better unit testing.
-* One other important benefit is decoupling and scalability hooks pattern provides. We can refactor code more easily and we can build more custom logic while *reusing* existing hooks.
+* This pattern allows the code to read better, allows for awesome functional composition and will lead to better unit testing
+* One other important benefit is decoupling and scalability hooks pattern provides. We can refactor code more easily and we can build more custom logic while *reusing* existing hooks
 
 ### UI Library
 These are simply dumb UI components that should be reused and linked off to a design system.
@@ -118,3 +123,5 @@ Components can be defined as building blocks of our views. Components use parts 
 * Send Message form requires interactive input validation
 * From input in Send Message form should integrate with REST API for number suggestions that a user can select
 * Reports page should use pagination and allow for better statistics reporting using charts and using data over longer period of time
+* Can add loading states on Send Message form
+* Can avoid using `display: none` using React conditional rendering based on a viewport
