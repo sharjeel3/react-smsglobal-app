@@ -24,7 +24,7 @@ export const messageReducer = (state = initialState, action) => {
       return {
         ...state,
         sendResponse: { ...action.response },
-        sendError: null,
+        sendError: action.error,
         isSent: action.isSent
       };
     case SEND_MESSAGE_FAILED:
